@@ -21,6 +21,3 @@ class MealRating(models.Model):
     meal = models.ForeignKey(Meal,on_delete=models.CASCADE)
     rating = models.FloatField()
     dateOfRating = models.DateTimeField(default=datetime.datetime.now())
-    
-    def __str__(self):
-        return self.meal.name
