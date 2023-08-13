@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Avg
 import datetime
 
 class Meal(models.Model):
@@ -16,6 +17,12 @@ class Meal(models.Model):
         
     def __str__(self):
         return self.name
+    
+    def avgRating(self):
+        return self.mealrating_set.aggregate(Avg("rating"))["rating__avg"]
+    
+    def numberOfVotes(self):
+        return self.mealrating_set.count()
 
 class MealRating(models.Model):
     meal = models.ForeignKey(Meal,on_delete=models.CASCADE)
