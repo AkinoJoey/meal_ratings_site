@@ -87,9 +87,8 @@
         <div class="uk-section uk-padding-remove-top">
             <div class="uk-container">
                 <h2>Add a new Meal</h2>
-                <form class="uk-form-stacked">
-
-                    <div class="uk-margin">
+                <!-- <form class="uk-form-stacked" method="post"> -->
+                    <!-- <div class="uk-margin">
                         <label class="uk-form-label" for="form-stacked-text">Name</label>
                         <div class="uk-form-controls">
                             <input class="uk-input" id="form-stacked-text" type="text" placeholder="Hamburger" required>
@@ -120,9 +119,50 @@
                         <div class="uk-form-controls">
                             <input class="uk-input" id="form-stacked-text" type="text" placeholder="Sandwich made with ground beef patty" required>
                         </div>
-                    </div>
-                    <button class="uk-button uk-button-primary uk-align-center">Submit</button>
-                </form>
+                    </div> -->
+                    <form class="uk-form-stacked" method="post">
+                        {% csrf_token %}
+                        
+                        <div class="uk-margin">
+                            <label class="uk-form-label" for="{{ form.name.id_for_label }}">Name</label>
+                            <div class="uk-form-controls">
+                                {{ form.name }}
+                            </div>
+                        </div>
+                        
+                        <div class="uk-margin">
+                            <label class="uk-form-label" for="{{ form.imageUrl.id_for_label }}">Image URL</label>
+                            <div class="uk-form-controls">
+                                {{ form.imageUrl }}
+                            </div>
+                        </div>
+                        
+                        <div class="uk-margin">
+                            <label class="uk-form-label" for="{{ form.countryOfOrigin.id_for_label }}">Country of Origin</label>
+                            <div class="uk-form-controls">
+                                {{ form.countryOfOrigin }}
+                            </div>
+                        </div>
+                        
+                        <div class="uk-margin">
+                            <div class="uk-form-label">Typical Time Eaten</div>
+                            <div class="uk-form-controls">
+                                {{ form.typicalMealTime }}
+                            </div>
+                        </div>
+                        
+                        <div class="uk-margin">
+                            <label class="uk-form-label" for="{{ form.description.id_for_label }}">Description</label>
+                            <div class="uk-form-controls">
+                                {{ form.description }}
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="uk-button uk-button-primary uk-align-center">Submit</button>
+                    </form>
+                    
+                    <!-- <button type="submit" class="uk-button uk-button-primary uk-align-center">Submit</button> -->
+                <!-- </form> -->
             </div>
         </div>
     </div>
