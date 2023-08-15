@@ -87,82 +87,57 @@
         <div class="uk-section uk-padding-remove-top">
             <div class="uk-container">
                 <h2>Add a new Meal</h2>
-                <!-- <form class="uk-form-stacked" method="post"> -->
-                    <!-- <div class="uk-margin">
-                        <label class="uk-form-label" for="form-stacked-text">Name</label>
-                        <div class="uk-form-controls">
-                            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Hamburger" required>
-                        </div>
-                    </div>
+                <form class="uk-form-stacked" method="post">
+                    {% csrf_token %}
+                    
                     <div class="uk-margin">
-                        <label class="uk-form-label" for="form-stacked-text">Image URL</label>
+                        <label class="uk-form-label" for="{{ form.name.id_for_label }}">Name</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input" id="form-stacked-text" type="text" placeholder="1.jpg" required>
+                            {{ form.name }}
                         </div>
                     </div>
+                    
                     <div class="uk-margin">
-                        <label class="uk-form-label" for="form-stacked-text">Country of Origin</label>
+                        <label class="uk-form-label" for="{{ form.imageUrl.id_for_label }}">Image URL</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Germany" required>
+                            {{ form.imageUrl }}
                         </div>
                     </div>
+                    
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="{{ form.countryOfOrigin.id_for_label }}">Country of Origin</label>
+                        <div class="uk-form-controls">
+                            {{ form.countryOfOrigin }}
+                        </div>
+                    </div>
+                    
                     <div class="uk-margin">
                         <div class="uk-form-label">Typical Time Eaten</div>
-                        <select class="uk-select" name="typical-meal-time" id="typical-meal-time">
-                            <option value="1">Morning</option>
-                            <option value="2">Afternoon</option>
-                            <option value="3">Evening</option>
-                        </select>
-                    </div>
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="form-stacked-text">Description</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Sandwich made with ground beef patty" required>
+                            {{ form.typicalMealTime }}
                         </div>
-                    </div> -->
-                    <form class="uk-form-stacked" method="post">
-                        {% csrf_token %}
-                        
-                        <div class="uk-margin">
-                            <label class="uk-form-label" for="{{ form.name.id_for_label }}">Name</label>
-                            <div class="uk-form-controls">
-                                {{ form.name }}
-                            </div>
-                        </div>
-                        
-                        <div class="uk-margin">
-                            <label class="uk-form-label" for="{{ form.imageUrl.id_for_label }}">Image URL</label>
-                            <div class="uk-form-controls">
-                                {{ form.imageUrl }}
-                            </div>
-                        </div>
-                        
-                        <div class="uk-margin">
-                            <label class="uk-form-label" for="{{ form.countryOfOrigin.id_for_label }}">Country of Origin</label>
-                            <div class="uk-form-controls">
-                                {{ form.countryOfOrigin }}
-                            </div>
-                        </div>
-                        
-                        <div class="uk-margin">
-                            <div class="uk-form-label">Typical Time Eaten</div>
-                            <div class="uk-form-controls">
-                                {{ form.typicalMealTime }}
-                            </div>
-                        </div>
-                        
-                        <div class="uk-margin">
-                            <label class="uk-form-label" for="{{ form.description.id_for_label }}">Description</label>
-                            <div class="uk-form-controls">
-                                {{ form.description }}
-                            </div>
-                        </div>
-                        
-                        <button type="submit" class="uk-button uk-button-primary uk-align-center">Submit</button>
-                    </form>
+                    </div>
                     
-                    <!-- <button type="submit" class="uk-button uk-button-primary uk-align-center">Submit</button> -->
-                <!-- </form> -->
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="{{ form.description.id_for_label }}">Description</label>
+                        <div class="uk-form-controls">
+                            {{ form.description }}
+                        </div>
+                    </div>
+                    <button type="submit" class="uk-button uk-button-primary uk-align-center">Submit</button>
+                </form>
+                {% if form.errors %}
+                    <div class="errors">
+                        <p>フォームに以下のエラーがあります:</p>
+                        <ul>
+                        {% for field in form %}
+                            {% if field.errors %}
+                                <li>{{ field.label }}: {{ field.errors|join:", " }}</li>
+                            {% endif %}
+                        {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -170,3 +145,5 @@
     
 </body>
 </html>
+
+                    

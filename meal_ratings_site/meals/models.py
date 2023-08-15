@@ -10,9 +10,9 @@ class Meal(models.Model):
         
     name = models.CharField(max_length=255)
     description = models.TextField()
-    imageUrl = models.ImageField()
+    imageUrl = models.ImageField(upload_to='meals/')
     countryOfOrigin = models.CharField(max_length=255)
-    typicalMealTime = models.IntegerField(MealTime.choices)
+    typicalMealTime = models.IntegerField(choices=MealTime.choices)
     dateAdded = models.DateTimeField(default=datetime.datetime.now())
         
     def __str__(self):
