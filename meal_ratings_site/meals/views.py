@@ -5,7 +5,9 @@ from django.db.models import Avg
 from .forms import MealForm
 
 def index(request):
+    # 評価が4.5以上の条件を付け加える
     top3_list = Meal.objects.annotate(avg_rating=Avg('mealrating__rating')).order_by('-avg_rating').values('name', 'imageUrl')[:3]
+    # 現在の日付から90日以内の条件を付け加える
     recently_added_list = Meal.objects.all().order_by('-dateAdded').values('name', 'imageUrl')[:3]
     
     morning = 1
@@ -21,7 +23,7 @@ def index(request):
         form = MealForm()
         
     elif request.method == 'POST':
-        form = MealForm(request.POST)
+        form = MealForm(request.POST,request.FILES)
         
         if form.is_valid():
             form.save()
