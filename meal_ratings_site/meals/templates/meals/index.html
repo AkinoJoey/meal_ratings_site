@@ -23,7 +23,7 @@
                 <div class="uk-flex uk-flex-around">
                     {% for meal in top3_list %}
                     <div class="uk-padding-small">
-                        <a href="#"><img src="{% static 'meals/images/' %}{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>       
+                        <a href="#"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>       
                     </div>
                     {% endfor %}
                 </div>
@@ -37,7 +37,7 @@
                 <div class="uk-flex uk-flex-around">
                     {% for meal in recently_added_list %}
                     <div class="uk-padding-small">
-                        <a href="#"><img src="{% static 'meals/images/' %}{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>       
+                        <a href="#"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>       
                     </div>
                     {% endfor %}
                 </div>
@@ -50,7 +50,7 @@
                 <div class="uk-flex uk-flex-around">
                     {% for meal in morning_foods_list %}
                     <div class="uk-padding-small">
-                        <a href="#"><img src="{% static 'meals/images/' %}{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>       
+                        <a href="#"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>       
                     </div>
                     {% endfor %}
                 </div>
@@ -63,7 +63,7 @@
                 <div class="uk-flex uk-flex-around">
                     {% for meal in afternoon_foods_list %}
                     <div class="uk-padding-small">
-                        <a href="#"><img src="{% static 'meals/images/' %}{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>       
+                        <a href="#"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>       
                     </div>
                     {% endfor %}
                 </div>
@@ -76,7 +76,7 @@
                 <div class="uk-flex uk-flex-around">
                     {% for meal in evening_foods_list %}
                     <div class="uk-padding-small">
-                        <a href="#"><img src="{% static 'meals/images/' %}{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>       
+                        <a href="#"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>       
                     </div>
                     {% endfor %}
                 </div>
@@ -87,7 +87,7 @@
         <div class="uk-section uk-padding-remove-top">
             <div class="uk-container">
                 <h2>Add a new Meal</h2>
-                <form class="uk-form-stacked" method="post">
+                <form class="uk-form-stacked" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     
                     <div class="uk-margin">
