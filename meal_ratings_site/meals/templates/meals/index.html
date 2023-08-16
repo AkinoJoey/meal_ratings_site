@@ -21,9 +21,9 @@
         <div class="uk-section uk-padding-remove-top">
             <div class="uk-container">
                 <h2><a href="#">Top Rated</a></h2>
-                <div class="uk-flex uk-flex-around">
+                <div class="uk-flex uk-flex-around uk-align-center" uk-grid>
                     {% for meal in top3_list %}
-                    <div class="uk-padding-small uk-width-1-3">
+                    <div class="uk-padding-small uk-width-1-1 uk-width-1-3@s">
                         <div class="image-container">
                             <a href="#"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>
                         </div>
@@ -36,9 +36,9 @@
         <div class="uk-section uk-padding-remove-top">
             <div class="uk-container">
                 <h2><a href="#">Recently Added</a></h2>
-                <div class="uk-flex uk-flex-around">
+                <div class="uk-flex uk-flex-around uk-align-center" uk-grid>
                     {% for meal in recently_added_list %}
-                    <div class="uk-padding-small uk-width-1-3">
+                    <div class="uk-padding-small uk-width-1-1 uk-width-1-3@s">
                         <div class="image-container">
                             <a href="#"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>
                         </div>
@@ -51,9 +51,9 @@
         <div class="uk-section uk-padding-remove-top">
             <div class="uk-container">
                 <h2><a href="#">Morning Foods</a></h2>
-                <div class="uk-flex uk-flex-around">
+                <div class="uk-flex uk-flex-around uk-align-center" uk-grid>
                     {% for meal in morning_foods_list %}
-                    <div class="uk-padding-small uk-width-1-3">
+                    <div class="uk-padding-small uk-width-1-1 uk-width-1-3@s">
                         <div class="image-container">
                             <a href="#"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>
                         </div>
@@ -66,9 +66,9 @@
         <div class="uk-section uk-padding-remove-top">
             <div class="uk-container">
                 <h2><a href="#">Afternoon Foods</a></h2>
-                <div class="uk-flex uk-flex-around">
+                <div class="uk-flex uk-flex-around uk-align-center" uk-grid>
                     {% for meal in afternoon_foods_list %}
-                    <div class="uk-padding-small uk-width-1-3">
+                    <div class="uk-padding-small uk-width-1-1 uk-width-1-3@s">
                         <div class="image-container">
                             <a href="#"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>
                         </div>
@@ -81,9 +81,9 @@
         <div class="uk-section uk-padding-remove-top">
             <div class="uk-container">
                 <h2><a href="#">Evening Foods</a></h2>
-                <div class="uk-flex uk-flex-around">
+                <div class="uk-flex uk-flex-around uk-align-center" uk-grid>
                     {% for meal in evening_foods_list %}
-                    <div class="uk-padding-small uk-width-1-3">
+                    <div class="uk-padding-small uk-width-1-1 uk-width-1-3@s">
                         <div class="image-container">
                             <a href="#"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>
                         </div>
