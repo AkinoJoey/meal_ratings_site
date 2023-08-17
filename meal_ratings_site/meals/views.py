@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
 from django.http import HttpResponse
 from .models import Meal
 from django.db.models import Avg
@@ -38,3 +38,12 @@ def index(request):
             'form':form
     }
     return render(request, "meals/index.html", context)
+
+def morning(request):
+    morning = 1
+    
+    morning_foods_list = Meal.objects.filter(typicalMealTime = morning).values('name', 'imageUrl')
+    context = {
+        'morning_foods_list':morning_foods_list,
+    }
+    return render(request, 'meals/morning.html',context)
