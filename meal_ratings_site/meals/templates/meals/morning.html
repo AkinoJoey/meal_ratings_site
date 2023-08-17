@@ -1,0 +1,29 @@
+{% extends 'meals/base.html' %}
+
+{% block title %}
+<title>Morning Meals</title>
+{% endblock %}
+
+{% block content %}
+<header>
+    <nav class="uk-navbar-container" uk-navbar>
+        <div class="uk-navbar-center">
+            <ul class="uk-navbar-nav">
+                <li><a href="{% url 'index' %}">HOME</a></li>
+                <li><a href="#">Top Rated</a></li>
+                <li><a href="#">Recently Added</a></li>
+                <li><a href="{% url 'morning' %}">Morning</a></li>
+                <li><a href="#">Afternoon</a></li>
+                <li><a href="#">Evening</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<div class="uk-container">
+    <h1 class="uk-text-center uk-margin-medium-top">Morning Meals</h1>
+
+    
+</div>
+
+{% endblock %}
