@@ -1,159 +1,144 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'meals/base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'meals/style.css' %}">
-    <!-- UIkit CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.16.24/dist/css/uikit.min.css" />
-    <!-- UIkit JS -->
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.24/dist/js/uikit.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.24/dist/js/uikit-icons.min.js"></script>
-    <title>Meal Ratings Site</title>
-</head>
+{% block title %}
+<h1>Meal Ratings Site</h1>
+{% endblock title %}
 
-<body>
-    <div class="uk-container">
-        <h1 class="uk-text-center uk-margin-large-top"><a class="uk-link-reset" href="">Rate Your Favorite Meals</a></h1>
-        <!-- top rated -->
-        <div class="uk-section uk-padding-remove-top">
-            <div class="uk-container">
-                <h2><a href="#">Top Rated</a></h2>
-                <div class="uk-flex uk-flex-around uk-align-center" uk-grid>
-                    {% for meal in top3_list %}
-                    <div class="uk-padding-small uk-width-1-1 uk-width-1-3@s">
-                        <div class="image-container">
-                            <a href="#"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>
-                        </div>
+{% block content %}
+<div class="uk-container">
+    <h1 class="uk-text-center uk-margin-large-top"><a class="uk-link-reset" href="">Rate Your Favorite Meals</a></h1>
+    <!-- top rated -->
+    <div class="uk-section uk-padding-remove-top">
+        <div class="uk-container">
+            <h2><a href="#">Top Rated</a></h2>
+            <div class="uk-flex uk-flex-around uk-align-center" uk-grid>
+                {% for meal in top3_list %}
+                <div class="uk-padding-small uk-width-1-1 uk-width-1-3@s">
+                    <div class="image-container">
+                        <a href="#"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>
                     </div>
-                    {% endfor %}
                 </div>
+                {% endfor %}
             </div>
         </div>
-        <!-- recently added -->
-        <div class="uk-section uk-padding-remove-top">
-            <div class="uk-container">
-                <h2><a href="#">Recently Added</a></h2>
-                <div class="uk-flex uk-flex-around uk-align-center" uk-grid>
-                    {% for meal in recently_added_list %}
-                    <div class="uk-padding-small uk-width-1-1 uk-width-1-3@s">
-                        <div class="image-container">
-                            <a href="#"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>
-                        </div>
+    </div>
+    <!-- recently added -->
+    <div class="uk-section uk-padding-remove-top">
+        <div class="uk-container">
+            <h2><a href="#">Recently Added</a></h2>
+            <div class="uk-flex uk-flex-around uk-align-center" uk-grid>
+                {% for meal in recently_added_list %}
+                <div class="uk-padding-small uk-width-1-1 uk-width-1-3@s">
+                    <div class="image-container">
+                        <a href="#"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>
                     </div>
-                    {% endfor %}
                 </div>
+                {% endfor %}
             </div>
         </div>
-        <!-- morning -->
-        <div class="uk-section uk-padding-remove-top">
-            <div class="uk-container">
-                <h2><a href="#">Morning Foods</a></h2>
-                <div class="uk-flex uk-flex-around uk-align-center" uk-grid>
-                    {% for meal in morning_foods_list %}
-                    <div class="uk-padding-small uk-width-1-1 uk-width-1-3@s">
-                        <div class="image-container">
-                            <a href="#"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>
-                        </div>
+    </div>
+    <!-- morning -->
+    <div class="uk-section uk-padding-remove-top">
+        <div class="uk-container">
+            <h2><a href="#">Morning Foods</a></h2>
+            <div class="uk-flex uk-flex-around uk-align-center" uk-grid>
+                {% for meal in morning_foods_list %}
+                <div class="uk-padding-small uk-width-1-1 uk-width-1-3@s">
+                    <div class="image-container">
+                        <a href="#"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>
                     </div>
-                    {% endfor %}
                 </div>
+                {% endfor %}
             </div>
         </div>
-        <!-- afternoon -->
-        <div class="uk-section uk-padding-remove-top">
-            <div class="uk-container">
-                <h2><a href="#">Afternoon Foods</a></h2>
-                <div class="uk-flex uk-flex-around uk-align-center" uk-grid>
-                    {% for meal in afternoon_foods_list %}
-                    <div class="uk-padding-small uk-width-1-1 uk-width-1-3@s">
-                        <div class="image-container">
-                            <a href="#"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>
-                        </div>
+    </div>
+    <!-- afternoon -->
+    <div class="uk-section uk-padding-remove-top">
+        <div class="uk-container">
+            <h2><a href="#">Afternoon Foods</a></h2>
+            <div class="uk-flex uk-flex-around uk-align-center" uk-grid>
+                {% for meal in afternoon_foods_list %}
+                <div class="uk-padding-small uk-width-1-1 uk-width-1-3@s">
+                    <div class="image-container">
+                        <a href="#"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>
                     </div>
-                    {% endfor %}
                 </div>
+                {% endfor %}
             </div>
         </div>
-        <!-- evening -->
-        <div class="uk-section uk-padding-remove-top">
-            <div class="uk-container">
-                <h2><a href="#">Evening Foods</a></h2>
-                <div class="uk-flex uk-flex-around uk-align-center" uk-grid>
-                    {% for meal in evening_foods_list %}
-                    <div class="uk-padding-small uk-width-1-1 uk-width-1-3@s">
-                        <div class="image-container">
-                            <a href="#"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>
-                        </div>
+    </div>
+    <!-- evening -->
+    <div class="uk-section uk-padding-remove-top">
+        <div class="uk-container">
+            <h2><a href="#">Evening Foods</a></h2>
+            <div class="uk-flex uk-flex-around uk-align-center" uk-grid>
+                {% for meal in evening_foods_list %}
+                <div class="uk-padding-small uk-width-1-1 uk-width-1-3@s">
+                    <div class="image-container">
+                        <a href="#"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>
                     </div>
-                    {% endfor %}
                 </div>
-            </div>
-        </div>
-        
-        <!-- add a new meal -->
-        <div class="uk-section uk-padding-remove-top">
-            <div class="uk-container">
-                <h2>Add a new Meal</h2>
-                <form class="uk-form-stacked" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="{{ form.name.id_for_label }}">Name</label>
-                        <div class="uk-form-controls">
-                            {{ form.name }}
-                        </div>
-                    </div>
-                    
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="{{ form.imageUrl.id_for_label }}">Image URL</label>
-                        <div class="uk-form-controls">
-                            {{ form.imageUrl }}
-                        </div>
-                    </div>
-                    
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="{{ form.countryOfOrigin.id_for_label }}">Country of Origin</label>
-                        <div class="uk-form-controls">
-                            {{ form.countryOfOrigin }}
-                        </div>
-                    </div>
-                    
-                    <div class="uk-margin">
-                        <div class="uk-form-label">Typical Time Eaten</div>
-                        <div class="uk-form-controls">
-                            {{ form.typicalMealTime }}
-                        </div>
-                    </div>
-                    
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="{{ form.description.id_for_label }}">Description</label>
-                        <div class="uk-form-controls">
-                            {{ form.description }}
-                        </div>
-                    </div>
-                    <button type="submit" class="uk-button uk-button-primary uk-align-center">Submit</button>
-                </form>
-                {% if form.errors %}
-                    <div class="errors">
-                        <p>フォームに以下のエラーがあります:</p>
-                        <ul>
-                        {% for field in form %}
-                            {% if field.errors %}
-                                <li>{{ field.label }}: {{ field.errors|join:", " }}</li>
-                            {% endif %}
-                        {% endfor %}
-                        </ul>
-                    </div>
-                {% endif %}
+                {% endfor %}
             </div>
         </div>
     </div>
 
-    
-</body>
-</html>
+    <!-- add a new meal -->
+    <div class="uk-section uk-padding-remove-top">
+        <div class="uk-container">
+            <h2>Add a new Meal</h2>
+            <form class="uk-form-stacked" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
 
-                    
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="{{ form.name.id_for_label }}">Name</label>
+                    <div class="uk-form-controls">
+                        {{ form.name }}
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="{{ form.imageUrl.id_for_label }}">Image URL</label>
+                    <div class="uk-form-controls">
+                        {{ form.imageUrl }}
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="{{ form.countryOfOrigin.id_for_label }}">Country of Origin</label>
+                    <div class="uk-form-controls">
+                        {{ form.countryOfOrigin }}
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <div class="uk-form-label">Typical Time Eaten</div>
+                    <div class="uk-form-controls">
+                        {{ form.typicalMealTime }}
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="{{ form.description.id_for_label }}">Description</label>
+                    <div class="uk-form-controls">
+                        {{ form.description }}
+                    </div>
+                </div>
+                <button type="submit" class="uk-button uk-button-primary uk-align-center">Submit</button>
+            </form>
+            {% if form.errors %}
+            <div class="errors">
+                <p>フォームに以下のエラーがあります:</p>
+                <ul>
+                    {% for field in form %}
+                    {% if field.errors %}
+                    <li>{{ field.label }}: {{ field.errors|join:", " }}</li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
