@@ -9,9 +9,23 @@
 
 <div class="uk-container">
     <h1 class="uk-text-center uk-margin-top">Morning Meals</h1>
+
+    <div class="uk-container">
+        <div class="uk-flex uk-flex-right">
+        <div class="uk-flex uk-flex-column">
+                <p class="uk-margin-remove-bottom uk-text-center">Sort by</p>
+                <div class="uk-flex uk-flex-around">
+                    <p class="uk-margin-small-left uk-margin-small-right uk-margin-remove-bottom">Rating</p>
+                    <p class="uk-margin-small-left uk-margin-small-right uk-margin-remove-top uk-margin-remove-bottom">Country</p>
+                    <p class= "uk-margin-small-left uk-margin-small-right uk-margin-remove-top uk-margin-remove-bottom">Date</p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+
     <div class="uk-flex uk-flex-column uk-align-center">
-
-
         {% for meal in morning_foods_list %}
         <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
             <div class="uk-card-media-left uk-cover-container">
