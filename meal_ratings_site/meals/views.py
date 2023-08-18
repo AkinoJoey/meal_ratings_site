@@ -41,8 +41,7 @@ def index(request):
 
 def morning(request):
     morning = 1
-    
-    morning_foods_list = Meal.objects.filter(typicalMealTime = morning).values('name', 'imageUrl')
+    morning_foods_list = Meal.objects.filter(typicalMealTime = morning)
     context = {
         'morning_foods_list':morning_foods_list,
     }
