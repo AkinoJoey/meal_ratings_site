@@ -42,3 +42,14 @@ class MealForm(forms.ModelForm):
             'placeholder': 'Sandwich made with ground beef patty',
             'required': 'required',  
         })
+
+
+class SortForm(forms.Form):
+    CHOICES = [
+        ('',' -- Sort -- '),
+        ('rating', 'Rating'),
+        ('country', 'Country'),
+        ('date', 'Date')
+    ]
+    
+    choice_field = forms.ChoiceField(choices=CHOICES,widget=forms.Select(attrs={'id': 'sort-select','class':'uk-select uk-text-center'}))
