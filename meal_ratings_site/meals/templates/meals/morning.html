@@ -1,5 +1,5 @@
 {% extends 'meals/base.html' %}
-
+{% load  static %}
 {% block title %}
 <title>Morning Meals</title>
 {% endblock %}
@@ -12,20 +12,16 @@
 
     <div class="uk-container">
         <div class="uk-flex uk-flex-right">
-        <div class="uk-flex uk-flex-column">
-                <p class="uk-margin-remove-bottom uk-text-center">Sort by</p>
-                <div class="uk-flex uk-flex-around">
-                    <p class="uk-margin-small-left uk-margin-small-right uk-margin-remove-bottom">Rating</p>
-                    <p class="uk-margin-small-left uk-margin-small-right uk-margin-remove-top uk-margin-remove-bottom">Country</p>
-                    <p class= "uk-margin-small-left uk-margin-small-right uk-margin-remove-top uk-margin-remove-bottom">Date</p>
-                </div>
-            </div>
-            
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.choice_field }}
+            </form>
         </div>
+        
     </div>
     
 
-    <div class="uk-flex uk-flex-column uk-align-center">
+    <div id="meals-container" class="uk-flex uk-flex-column uk-align-center">
         {% for meal in morning_foods_list %}
         <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
             <div class="uk-card-media-left uk-cover-container">
@@ -41,14 +37,9 @@
                     </div>
                 </div>
             </div>
-
         </div>
         {% endfor %}
-
-
     </div>
-
-
 </div>
-
+<script src="{% static 'meals/main.js' %}"></script>
 {% endblock %}
