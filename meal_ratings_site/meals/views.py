@@ -1,8 +1,9 @@
 from django.shortcuts import render,redirect,HttpResponse
-from django.http import HttpResponse
+from django.http import JsonResponse
 from .models import Meal
 from django.db.models import Avg
-from .forms import MealForm
+from .forms import MealForm,SortForm
+from django.core import serializers
 
 def index(request):
     # 評価が4.5以上の条件を付け加える
@@ -42,7 +43,19 @@ def index(request):
 def morning(request):
     morning = 1
     morning_foods_list = Meal.objects.filter(typicalMealTime = morning)
-    context = {
-        'morning_foods_list':morning_foods_list,
-    }
+        
+    if request.method == 'GET':    
+        
+        form = SortForm()
+        context = {
+            'morning_foods_list':morning_foods_list,
+            'form':form,
+        }
+
+    elif request.method == 'POST':
+        form = SortForm(request.POST)
+        morning_foods_list = Meal.objects.filter(typicalMealTime=Meal.MealTime.morning).annotate(average_rating=Avg('mealrating__rating')).order_by('-average_rating')
+        data = list(morning_foods_list.values())
+        return JsonResponse({'data':data})
+    
     return render(request, 'meals/morning.html',context)
