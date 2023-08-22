@@ -52,4 +52,8 @@ class SortForm(forms.Form):
         ('date', 'Date')
     ]
     
-    choice_field = forms.ChoiceField(choices=CHOICES,widget=forms.Select(attrs={'id': 'sort-select','class':'uk-select uk-text-center'}))
+    choice_field = forms.ChoiceField(
+        choices=CHOICES,
+        widget=forms.Select(
+            attrs={'id': 'sort-select','class':'uk-select uk-text-center'}
+            ))
