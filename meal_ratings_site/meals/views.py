@@ -4,6 +4,8 @@ from .models import Meal
 from django.db.models import Avg
 from .forms import MealForm,SortForm
 from django.core import serializers
+from django.core.serializers import serialize
+import json
 
 def index(request):
     # 評価が4.5以上の条件を付け加える
@@ -41,21 +43,26 @@ def index(request):
     return render(request, "meals/index.html", context)
 
 def morning(request):
-    morning = 1
-    morning_foods_list = Meal.objects.filter(typicalMealTime = morning)
+    morning_foods_list = Meal.objects.filter(typicalMealTime = Meal.MealTime.morning)
         
-    if request.method == 'GET':    
+    if request.method == 'GET':  
+        selected_order = request.GET.get('order','default')
         
-        form = SortForm()
+        if selected_order == 'rating':
+            morning_foods_list =  morning_foods_list.annotate(average_rating=Avg('mealrating__rating')).order_by('-average_rating')  
+        elif selected_order == 'country':
+            morning_foods_list = morning_foods_list.order_by('countryOfOrigin')
+        elif selected_order == 'date':
+            morning_foods_list = morning_foods_list.order_by('-dateAdded')
+        else:
+            morning_foods_list
+        
+        form = SortForm(request.GET)
+        
         context = {
             'morning_foods_list':morning_foods_list,
             'form':form,
         }
 
-    elif request.method == 'POST':
-        form = SortForm(request.POST)
-        morning_foods_list = Meal.objects.filter(typicalMealTime=Meal.MealTime.morning).annotate(average_rating=Avg('mealrating__rating')).order_by('-average_rating')
-        data = list(morning_foods_list.values())
-        return JsonResponse({'data':data})
     
     return render(request, 'meals/morning.html',context)
