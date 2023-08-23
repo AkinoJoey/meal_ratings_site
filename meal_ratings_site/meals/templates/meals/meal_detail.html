@@ -6,5 +6,13 @@
 
 {% block content %}
 {% include 'meals/header.html' %}
-test
+<div class="uk-container uk-flex uk-flex-column">
+    <h2 class="uk-text-center uk-margin-top">{{ meal.name }}</h2>
+    
+    <img src="/media/{{ meal.imageUrl }}" width="600" height="400" alt="">
+    <p>Country of origin: {{ meal.countryOfOrigin }}</p>
+    <p>Description: {{ meal.description }}</p>
+    <p>Avg Score: {{ meal.avgRating }}</p>
+    <p>Votes: {{ meal.numberOfVotes }}</p>
+</div>
 {% endblock %}
