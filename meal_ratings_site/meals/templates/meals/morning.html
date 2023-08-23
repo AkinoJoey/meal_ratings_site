@@ -22,8 +22,8 @@
 
     <div id="meals-container" class="uk-flex uk-flex-column uk-align-center">
         {% for meal in morning_foods_list %}
-        <a href="#" class="uk-text-decoration-none">
-            <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+        <a href="#" class="uk-text-decoration-none uk-margin">
+            <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s" uk-grid>
                 <div class="uk-card-media-left uk-cover-container">
                     <img src="/media/{{ meal.imageUrl }}" alt="" uk-cover>
                     <canvas width="600" height="400"></canvas>
