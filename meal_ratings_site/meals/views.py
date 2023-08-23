@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect,HttpResponse
+from django.shortcuts import render,redirect,get_object_or_404
 from django.http import JsonResponse
 from .models import Meal
 from django.db.models import Avg
@@ -67,4 +67,8 @@ def morning(request):
 
 
 def meal_detail(request, meal_slug):
-    return render(request,'meals/meal_detail.html')
+    meal = get_object_or_404(Meal, slug=meal_slug)
+    context = {
+        'meal':meal
+    }
+    return render(request,'meals/meal_detail.html',context)
