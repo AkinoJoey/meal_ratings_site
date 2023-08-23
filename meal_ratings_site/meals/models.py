@@ -3,6 +3,7 @@ from django.db.models import Avg
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.conf import settings
+from django.template.defaultfilters import slugify
 import datetime
 import os
 
@@ -19,6 +20,7 @@ class Meal(models.Model):
     countryOfOrigin = models.CharField(max_length=255)
     typicalMealTime = models.IntegerField(choices=MealTime.choices)
     dateAdded = models.DateTimeField(default=datetime.datetime.now())
+    slug = models.SlugField(null=True, unique=True)
         
     def __str__(self):
         return self.name
@@ -28,6 +30,11 @@ class Meal(models.Model):
     
     def numberOfVotes(self):
         return self.mealrating_set.count()
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        return super().save(*args, **kwargs)
     
 class MealRating(models.Model):
     meal = models.ForeignKey(Meal,on_delete=models.CASCADE)
