@@ -46,7 +46,7 @@ def morning(request):
     morning_foods_list = Meal.objects.filter(typicalMealTime = Meal.MealTime.morning)
         
     if request.method == 'GET':  
-        selected_order = request.GET.get('order','default')
+        selected_order = request.GET.get('order')
         
         if selected_order == 'rating':
             morning_foods_list =  morning_foods_list.annotate(average_rating=Avg('mealrating__rating')).order_by('-average_rating')  
@@ -57,8 +57,7 @@ def morning(request):
         else:
             morning_foods_list
         
-        form = SortForm(request.GET)
-        
+        form = SortForm(initial={'choice_field': selected_order})
         context = {
             'morning_foods_list':morning_foods_list,
             'form':form,
