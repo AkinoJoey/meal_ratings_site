@@ -62,6 +62,9 @@ def morning(request):
             'morning_foods_list':morning_foods_list,
             'form':form,
         }
-
     
     return render(request, 'meals/morning.html',context)
+
+
+def meal_detail(request, meal_slug):
+    return render(request,'meals/meal_detail.html')
