@@ -1,5 +1,5 @@
 {% extends 'meals/base.html' %}
-{% load  static %}
+{% load static %}
 {% block title %}
 <title>Morning Meals</title>
 {% endblock %}
@@ -16,11 +16,10 @@
                 {{ form.choice_field }}
             </form>
         </div>
-        
     </div>
-    
 
-    <div id="meals-container" class="uk-flex uk-flex-column uk-align-center">
+
+    <div class="uk-flex uk-flex-column uk-align-center">
         {% for meal in morning_foods_list %}
         <a href="#" class="uk-text-decoration-none uk-margin">
             <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s" uk-grid>
