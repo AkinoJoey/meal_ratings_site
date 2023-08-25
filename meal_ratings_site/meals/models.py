@@ -7,7 +7,6 @@ from django.template.defaultfilters import slugify
 import datetime
 import os
 
-
 class Meal(models.Model):
     class MealTime(models.IntegerChoices):
         morning = 1,
@@ -20,7 +19,7 @@ class Meal(models.Model):
     countryOfOrigin = models.CharField(max_length=255)
     typicalMealTime = models.IntegerField(choices=MealTime.choices)
     dateAdded = models.DateTimeField(default=datetime.datetime.now())
-    # slug = models.SlugField(null=True, unique=True)
+    slug = models.SlugField(null=True, unique=True)
         
     def __str__(self):
         return self.name
@@ -32,6 +31,8 @@ class Meal(models.Model):
         return self.mealrating_set.count()
 
     def save(self, *args, **kwargs):
+        self.set_slug()
+    
         # pkを取得するために1度保存
         super().save(*args, **kwargs)
         self.set_imageUrl()
@@ -41,19 +42,19 @@ class Meal(models.Model):
         old_filename = self.imageUrl.name
         extension = old_filename.split('.')[-1]
         new_filename = f'{self.pk}.{extension}'  
-        self.imageUrl = new_filename  
         
-        self.rename_image_name(old_filename, new_filename)
+        if old_filename != new_filename:
+            self.imageUrl = new_filename  
+            self.rename_image_name(old_filename, new_filename)
         
     def rename_image_name(self,old_filename, new_filename):
         old_path = os.path.join(settings.MEDIA_ROOT, old_filename) 
         new_path = os.path.join(settings.MEDIA_ROOT, new_filename)
         os.rename(old_path, new_path)
         
-    # def save(self, *args, **kwargs):
-    #     if not self.slug:
-    #         self.slug = slugify(self.name)
-    #     return super().save(*args, **kwargs)
+    def set_slug(self):
+        if self.slug is None:
+            self.slug = slugify(self.name)
     
 class MealRating(models.Model):
     meal = models.ForeignKey(Meal,on_delete=models.CASCADE)
