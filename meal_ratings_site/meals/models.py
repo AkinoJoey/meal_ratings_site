@@ -16,11 +16,11 @@ class Meal(models.Model):
         
     name = models.CharField(max_length=255)
     description = models.TextField()
-    imageUrl = models.ImageField(upload_to='images/')
+    imageUrl = models.ImageField()
     countryOfOrigin = models.CharField(max_length=255)
     typicalMealTime = models.IntegerField(choices=MealTime.choices)
     dateAdded = models.DateTimeField(default=datetime.datetime.now())
-    slug = models.SlugField(null=True, unique=True)
+    # slug = models.SlugField(null=True, unique=True)
         
     def __str__(self):
         return self.name
@@ -30,31 +30,32 @@ class Meal(models.Model):
     
     def numberOfVotes(self):
         return self.mealrating_set.count()
-    
+
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
+        # pkを取得するために1度保存
+        super().save(*args, **kwargs)
+        self.set_imageUrl()
         return super().save(*args, **kwargs)
+    
+    def set_imageUrl(self):
+        old_filename = self.imageUrl.name
+        extension = old_filename.split('.')[-1]
+        new_filename = f'{self.pk}.{extension}'  
+        self.imageUrl = new_filename  
+        
+        self.rename_image_name(old_filename, new_filename)
+        
+    def rename_image_name(self,old_filename, new_filename):
+        old_path = os.path.join(settings.MEDIA_ROOT, old_filename) 
+        new_path = os.path.join(settings.MEDIA_ROOT, new_filename)
+        os.rename(old_path, new_path)
+        
+    # def save(self, *args, **kwargs):
+    #     if not self.slug:
+    #         self.slug = slugify(self.name)
+    #     return super().save(*args, **kwargs)
     
 class MealRating(models.Model):
     meal = models.ForeignKey(Meal,on_delete=models.CASCADE)
     rating = models.FloatField()
     dateOfRating = models.DateTimeField(default=datetime.datetime.now())
-
-# インスタンスを保存してpkが作成された後に、imageUrlをpkにupdateする
-@receiver(post_save, sender=Meal)
-def set_meal_image_url(sender, instance, **kwargs):
-    Meal.objects.filter(pk=instance.pk).update(imageUrl=f'images/{instance.pk}.jpg')
-
-# インスタンスを保存して、pkが作成された後に、uploadされた画像の名前を変更する
-@receiver(post_save, sender=Meal)
-def rename_meal_image(sender, instance, **kwargs):
-    if instance.imageUrl:
-        old_path = instance.imageUrl.path
-        new_filename = f'{instance.pk}.jpg'
-        new_path = os.path.join(settings.MEDIA_ROOT, 'images', new_filename)
-        
-        if old_path != new_path:
-            os.rename(old_path, new_path)
-            instance.imageUrl.name = f'images/{new_filename}'
-            instance.save(update_fields=['imageUrl'])
