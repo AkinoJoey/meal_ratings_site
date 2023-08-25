@@ -6,13 +6,17 @@
 
 {% block content %}
 {% include 'meals/header.html' %}
-<div class="uk-container uk-flex uk-flex-column">
+<div class="uk-container uk-flex uk-flex-column uk-flex-center">
     <h2 class="uk-text-center uk-margin-top">{{ meal.name }}</h2>
+    <div class="uk-flex uk-flex-center">
+            <img class="uk-width-xlarge" src="/media/{{ meal.imageUrl }}" alt="">
+    </div>
+    <div class="uk-text-center uk-margin-top" >
+        <p>Country of origin: {{ meal.countryOfOrigin }}</p>
+        <p>Description: {{ meal.description }}</p>
+        <p>Avg Score: {{ meal.avgRating }}</p>
+        <p>Votes: {{ meal.numberOfVotes }}</p> 
+    </div>
     
-    <img src="/media/{{ meal.imageUrl }}" width="600" height="400" alt="">
-    <p>Country of origin: {{ meal.countryOfOrigin }}</p>
-    <p>Description: {{ meal.description }}</p>
-    <p>Avg Score: {{ meal.avgRating }}</p>
-    <p>Votes: {{ meal.numberOfVotes }}</p>
 </div>
 {% endblock %}
