@@ -68,7 +68,24 @@ def morning(request):
 
 def meal_detail(request, meal_slug):
     meal = get_object_or_404(Meal, slug=meal_slug)
-    context = {
-        'meal':meal
-    }
+    
+    if request.method == 'GET':
+        
+        context = {
+            'meal':meal
+        }
+        
+    elif request.method == 'POST':
+        print(request.POST.get('rating')) #POSTした値を取得する
+        
+        # slugで絞り込んでPKを取得する
+        print(Meal.objects.get(slug = meal_slug).pk)
+        
+        #MealRatingオブジェクトとして保存する
+        
+        
+        context = {
+            'meal':meal
+        }
+        
     return render(request,'meals/meal_detail.html',context)
