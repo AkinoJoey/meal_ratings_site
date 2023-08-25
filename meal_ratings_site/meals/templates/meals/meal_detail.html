@@ -23,9 +23,10 @@
                 <output id="value"></output>
             </h3>
             <div class="uk-flex uk-flex-center">
-                <form>
+                <form method="post">
+                    {% csrf_token %}
                     <div class="uk-margin">
-                        <input id="rating-input" class="uk-width-medium uk-margin-bottom" type="range" step="0.5" min="0" max="5" >
+                        <input id="rating-input" name="rating" class="uk-width-medium uk-margin-bottom" type="range" step="0.5" min="0" max="5" >
                     </div>
                     <button type="submit" class="uk-button uk-button-primary uk-align-center uk-margin-remove-top">Submit</button>
                 </form>
