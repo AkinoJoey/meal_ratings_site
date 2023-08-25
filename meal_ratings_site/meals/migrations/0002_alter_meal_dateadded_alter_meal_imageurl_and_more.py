@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='meal',
             name='imageUrl',
-            field=models.ImageField(upload_to='images/'),
+            field=models.ImageField(),
         ),
         migrations.AlterField(
             model_name='meal',
