@@ -22,5 +22,5 @@ class Migration(migrations.Migration):
             name='slug',
             field=models.SlugField(null=True, unique=True),
         ),
-        migrations.RunPython(generate_slugs),
+        # migrations.RunPython(generate_slugs),
     ]
