@@ -1,11 +1,12 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import JsonResponse
-from .models import Meal
+from .models import Meal, MealRating
 from django.db.models import Avg
 from .forms import MealForm,SortForm
 from django.core import serializers
 from django.core.serializers import serialize
-import json
+import datetime
+
 
 def index(request):
     # 評価が4.5以上の条件を付け加える
@@ -76,16 +77,11 @@ def meal_detail(request, meal_slug):
         }
         
     elif request.method == 'POST':
-        print(request.POST.get('rating')) #POSTした値を取得する
+        meal_instance = Meal.objects.get(slug = meal_slug)
+        rating = request.POST.get('rating')
+        rating_instance = MealRating(meal=meal_instance,rating=rating)
+        rating_instance.save()
         
-        # slugで絞り込んでPKを取得する
-        print(Meal.objects.get(slug = meal_slug).pk)
-        
-        #MealRatingオブジェクトとして保存する
-        
-        
-        context = {
-            'meal':meal
-        }
+        return redirect(request.path)
         
     return render(request,'meals/meal_detail.html',context)
