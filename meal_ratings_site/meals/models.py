@@ -6,6 +6,7 @@ from django.conf import settings
 from django.template.defaultfilters import slugify
 import datetime
 import os
+from django.utils import timezone
 
 class Meal(models.Model):
     class MealTime(models.IntegerChoices):
@@ -18,7 +19,7 @@ class Meal(models.Model):
     imageUrl = models.ImageField()
     countryOfOrigin = models.CharField(max_length=255)
     typicalMealTime = models.IntegerField(choices=MealTime.choices)
-    dateAdded = models.DateTimeField(default=datetime.datetime.now())
+    dateAdded = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(null=True, unique=True)
         
     def __str__(self):
@@ -59,4 +60,4 @@ class Meal(models.Model):
 class MealRating(models.Model):
     meal = models.ForeignKey(Meal,on_delete=models.CASCADE)
     rating = models.FloatField()
-    dateOfRating = models.DateTimeField(default=datetime.datetime.now())
+    dateOfRating = models.DateTimeField(auto_now_add=True)
