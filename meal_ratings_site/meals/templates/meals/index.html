@@ -12,12 +12,12 @@
     <!-- top rated -->
     <div class="uk-section uk-padding-remove-top">
         <div class="uk-container">
-            <h2><a href="#">Top Rated</a></h2>
+            <h2><a href="{% url 'category' 'top_rated' %}">Top Rated</a></h2>
             <div class="uk-flex uk-flex-around uk-align-center" uk-grid>
                 {% for meal in top3_list %}
                 <div class="uk-padding-small uk-width-1-1 uk-width-1-3@s">
                     <div class="image-container">
-                        <a href="#"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>
+                        <a href="/meals/{{ meal.slug }}"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>
                     </div>
                 </div>
                 {% endfor %}
@@ -27,12 +27,12 @@
     <!-- recently added -->
     <div class="uk-section uk-padding-remove-top">
         <div class="uk-container">
-            <h2><a href="#">Recently Added</a></h2>
+            <h2><a href="{% url 'category' 'recently_added' %}">Recently Added</a></h2>
             <div class="uk-flex uk-flex-around uk-align-center" uk-grid>
                 {% for meal in recently_added_list %}
                 <div class="uk-padding-small uk-width-1-1 uk-width-1-3@s">
                     <div class="image-container">
-                        <a href="#"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>
+                        <a href="/meals/{{ meal.slug }}"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>
                     </div>
                 </div>
                 {% endfor %}
@@ -42,12 +42,12 @@
     <!-- morning -->
     <div class="uk-section uk-padding-remove-top">
         <div class="uk-container">
-            <h2><a href="#">Morning Meals</a></h2>
+            <h2><a href="{% url 'category' 'morning' %}">Morning</a></h2>
             <div class="uk-flex uk-flex-around uk-align-center" uk-grid>
                 {% for meal in morning_foods_list %}
                 <div class="uk-padding-small uk-width-1-1 uk-width-1-3@s">
                     <div class="image-container">
-                        <a href="#"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>
+                        <a href="/meals/{{ meal.slug }}"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>
                     </div>
                 </div>
                 {% endfor %}
@@ -57,12 +57,12 @@
     <!-- afternoon -->
     <div class="uk-section uk-padding-remove-top">
         <div class="uk-container">
-            <h2><a href="#">Afternoon Meals</a></h2>
+            <h2><a href="{% url 'category' 'afternoon' %}">Afternoon</a></h2>
             <div class="uk-flex uk-flex-around uk-align-center" uk-grid>
                 {% for meal in afternoon_foods_list %}
                 <div class="uk-padding-small uk-width-1-1 uk-width-1-3@s">
                     <div class="image-container">
-                        <a href="#"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>
+                        <a href="/meals/{{ meal.slug }}"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>
                     </div>
                 </div>
                 {% endfor %}
@@ -72,12 +72,12 @@
     <!-- evening -->
     <div class="uk-section uk-padding-remove-top">
         <div class="uk-container">
-            <h2><a href="#">Evening Meals</a></h2>
+            <h2><a href="{% url 'category' 'evening' %}">Evening</a></h2>
             <div class="uk-flex uk-flex-around uk-align-center" uk-grid>
                 {% for meal in evening_foods_list %}
                 <div class="uk-padding-small uk-width-1-1 uk-width-1-3@s">
                     <div class="image-container">
-                        <a href="#"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>
+                        <a href="/meals/{{ meal.slug }}"><img src="/media/{{ meal.imageUrl }}" alt="{{ meal.name }}"></a>
                     </div>
                 </div>
                 {% endfor %}
