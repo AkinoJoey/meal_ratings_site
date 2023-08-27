@@ -1,13 +1,13 @@
 {% extends 'meals/base.html' %}
 {% load  static %}
 {% block title %}
-<title>Morning Meals</title>
+<title class="uk-text-capitalize">{{ meal.name }}</title>
 {% endblock %}
 
 {% block content %}
 {% include 'meals/header.html' %}
 <div class="uk-container uk-flex uk-flex-column uk-flex-center">
-    <h2 class="uk-text-center uk-margin-top">{{ meal.name }}</h2>
+    <h2 class="uk-text-center uk-margin-top uk-text-capitalize">{{ meal.name }}</h2>
     <div class="uk-flex uk-flex-center">
             <img class="uk-width-xlarge" src="/media/{{ meal.imageUrl }}" alt="">
     </div>
