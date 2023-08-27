@@ -1,0 +1,45 @@
+{% extends 'meals/base.html' %}
+{% load static %}
+{% block title %}
+<title>{{ title }}</title>
+{% endblock %}
+
+{% block content %}
+{% include 'meals/header.html' %}
+
+<div class="uk-container">
+    <h1 class="uk-text-center uk-margin-top">{{ title }}</h1>
+
+    <div class="uk-container">
+        <div class="uk-flex uk-flex-right">
+            <form method="GET">
+                {{ form.choice_field }}
+            </form>
+        </div>
+    </div>
+
+
+    <div class="uk-flex uk-flex-column uk-align-center">
+        {% for meal in foods_list %}
+        <a href="/meals/{{ meal.slug }}" class="uk-text-decoration-none uk-margin">
+            <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s" uk-grid>
+                <div class="uk-card-media-left uk-cover-container">
+                    <img src="/media/{{ meal.imageUrl }}" alt="" uk-cover>
+                    <canvas width="600" height="400"></canvas>
+                </div>
+                <div class="uk-flex uk-flex-center">
+                    <div class="uk-card-body uk-flex uk-flex-column uk-flex-around uk-text-center">
+                        <h3 class="uk-card-title uk-text-capitalize">{{ meal.name }}</h3>
+                        <div>
+                            <p>Avg Score: {{ meal.avgRating }}</p>
+                            <p>Votes: {{ meal.numberOfVotes}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+<script src="{% static 'meals/main.js' %}"></script>
+{% endblock %}
