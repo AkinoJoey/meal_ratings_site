@@ -7,11 +7,11 @@
                     <a href="#">Category</a>
                     <div class="uk-navbar-dropdown">
                         <ul class="uk-nav uk-navbar-dropdown-nav">
-                            <li><a href="#">Top Rated</a></li>
-                            <li><a href="#">Recently Added</a></li>
-                            <li><a href="{% url 'morning' %}">Morning</a></li>
-                            <li><a href="#">Afternoon</a></li>
-                            <li><a href="#">Evening</a></li>
+                            <li><a href="{% url 'category' 'top_rated' %}">Top Rated</a></li>
+                            <li><a href="{% url 'category' 'recently_added' %}">Recently Added</a></li>
+                            <li><a href="{% url 'category' 'morning' %}">Morning</a></li>
+                            <li><a href="{% url 'category' 'afternoon' %}">Afternoon</a></li>
+                            <li><a href="{% url 'category' 'evening' %}">Evening</a></li>
                         </ul>
                     </div>
                 </li>
