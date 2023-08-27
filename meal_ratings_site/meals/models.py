@@ -1,12 +1,8 @@
 from django.db import models
 from django.db.models import Avg
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 from django.conf import settings
 from django.template.defaultfilters import slugify
-import datetime
 import os
-from django.utils import timezone
 
 class Meal(models.Model):
     class MealTime(models.IntegerChoices):
