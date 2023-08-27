@@ -5,22 +5,29 @@ from django.db.models import Avg
 from .forms import MealForm,SortForm
 from django.core import serializers
 from django.core.serializers import serialize
-import datetime
+from datetime import timedelta
+from django.utils import timezone
 
 
 def index(request):
-    # 評価が4.5以上の条件を付け加える
-    top3_list = Meal.objects.annotate(avg_rating=Avg('mealrating__rating')).order_by('-avg_rating').values('name', 'imageUrl')[:3]
-    # 現在の日付から90日以内の条件を付け加える
-    recently_added_list = Meal.objects.all().order_by('-dateAdded').values('name', 'imageUrl')[:3]
+    # 評価が4.5以上の条件を付け加える。もし評価が4.5以上のデータが3つ以上なかったら、その条件を省く
+    avg_rating_threshold = 4.5
+    top3_list = Meal.objects.annotate(avg_rating=Avg('mealrating__rating')).filter(avg_rating__gte = avg_rating_threshold).order_by('-avg_rating').values('name', 'imageUrl')[:3]
     
-    morning = 1
-    afternoon = 2
-    evening = 3
+    if len(top3_list) < 3:
+        top3_list = Meal.objects.annotate(avg_rating=Avg('mealrating__rating')).order_by('-avg_rating').values('name', 'imageUrl')[:3]
     
-    morning_foods_list = Meal.objects.filter(typicalMealTime = morning).values('name','imageUrl')[:3]
-    afternoon_foods_list = Meal.objects.filter(typicalMealTime = afternoon).values('name','imageUrl')[:3]
-    evening_foods_list = Meal.objects.filter(typicalMealTime = evening).values('name','imageUrl')[:3]
+    # 現在の日付から90日以内の条件を付け加える。もしデータが3つ以上なかったら、その条件を省いた最近追加した順にする
+    ninety_days_ago = timezone.now() - timedelta(days=90)
+    recently_added_list = Meal.objects.all().filter(dateAdded__range=[ninety_days_ago, timezone.now()]).order_by('-dateAdded').values('name', 'imageUrl')[:3]
+    
+    if len(recently_added_list) < 3:
+        recently_added_list = Meal.objects.all().order_by('-dateAdded').values('name', 'imageUrl')[:3]
+
+    
+    morning_foods_list = Meal.objects.filter(typicalMealTime = Meal.MealTime.morning).values('name','imageUrl')[:3]
+    afternoon_foods_list = Meal.objects.filter(typicalMealTime = Meal.MealTime.afternoon).values('name','imageUrl')[:3]
+    evening_foods_list = Meal.objects.filter(typicalMealTime = Meal.MealTime.evening).values('name','imageUrl')[:3]
     
     
     if request.method == 'GET':
